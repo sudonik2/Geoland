@@ -86,9 +86,9 @@ var states = [{
 L.geoJSON(states, {
   style: function(feature) {
     switch (feature.properties.party) {
-      case 'Republican': return {color: "#00FF00"};
-      case 'Democrat':   return {color: "#eed202"};
-      case 'Democrat':   return {color: "#ff0e0e"};
+      case 'safety': return {color: "#00FF00"};
+      case 'caution':   return {color: "#eed202"};
+      case 'danger':   return {color: "#ff0e0e"};
 
     }
   }
