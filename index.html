@@ -29,12 +29,22 @@
 
 <script>
 //initialize map
-var map = L.map('map').setView([28.71, -80.0], 13);
+var map = L.map('map').setView([26.71, -80.0], 16);
 
 //maptile
 var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 }).addTo(map);
+
+var baseMaps = {
+  "ArcGIS": sat,
+};
+
+var overlayMaps = {
+  "Data": zones
+};
+
+var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
 function extracted() {
   L
