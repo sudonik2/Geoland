@@ -1,43 +1,56 @@
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title> GEOLAND ELD </title>
+<head>
+  <meta charset="utf-8">
+  <title> GEOLAND ELD </title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-<style>
-  #map{
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+  <style>
+    #map{
       width: 100%;
       height: 100vh;
-          }
-</style>
+    }
+  </style>
 
-  </head>
-    <body>
+</head>
+<body>
 <div id="map"> </div>
-  </body>
+</body>
 </html>
 
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin="">
-   </script>
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin="">
+</script>
 
 
 <script>
-//initialize map
-var map = L.map('map').setView([26.592304, -80.084910], 15.6);
+  //initialize map
+  var map = L.map('map').setView([26.592304, -80.084910], 15.6);
+  //var map = L.map('map', {
+    //center: [26.59, -80.04],
+    //zoom: 15.6,
+    //layers: [sat, zones]
+  //});
 
-//maptile
-var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-}).addTo(map);
+  //maptile
+  var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+  }).addTo(map);
 
+  //var zones = L.layerGroup([Safe, Caution, Danger]);
 
-//Layers
+  //Layers
+  var baseMaps = {
+    "Satellite": sat
+  };
 
+//  var overlayMaps = {
+//    "Zones": zones
+//};
 
+L.control.layers(baseMaps).addTo(map)
 </script>
