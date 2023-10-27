@@ -36,6 +36,14 @@
     //layers: [sat, zones]
   //});
 
+  // colors to use in a geoJson style object
+  var polygonColors = {
+    'green': "#00ff22",
+    'yellow': "#eed202",
+    'red': "#ff0000",
+    'blue': "#102ebd",
+  }
+
   //maptile
   var sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -82,23 +90,15 @@
     ]
   };
 
-  var myStyle = {
-    "color": "#00ff22",
-    "weight": 5,
-    "opacity": 0.65
-  };
-
-
   var myLayer = L.geoJSON(geojsonFeature, {style:function(feature) {
           switch (feature.properties.zone) {
-              case 'Safe': return {color: "#00ff22"};
-              case 'Caution':   return {color: "#eed202"};
-              case 'Danger' :  return {color: "#ff0000"};
-              default: return {color:"#102ebd"}
+              case 'Safe': return {color: polygonColors.green};
+              case 'Caution':   return {color: polygonColors.yellow};
+              case 'Danger' :  return {color: polygonColors.red};
+              default: return {color: polygonColors.blue}
           }
       }
   }).addTo(map);
- //myLayer.addData(geojsonFeature, {style: myStyle});
 
 
   // var zones = [{
