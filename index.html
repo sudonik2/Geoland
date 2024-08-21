@@ -39,10 +39,9 @@
     .logo-container {
       position: fixed;
       bottom: 10px; /* Adjust this value as needed */
-      left: 50%;
-      transform: translateX(-50%);
+      left: 10px; /* Move to bottom-left corner */
       z-index: 1000;
-      text-align: center;
+      text-align: left; /* Align logo to the left */
     }
     .logo-container img {
       max-width: 150px; /* Adjust the size as needed */
@@ -51,7 +50,8 @@
     .small-banner {
       position: fixed;
       bottom: 0;
-      left: 0;
+      left: 50%;
+      transform: translateX(-50%); /* Center the email */
       background-color: #f8f9fa;
       border: 1px solid #ddd;
       border-radius: 3px;
@@ -59,6 +59,7 @@
       font-size: 12px; /* Very small font size */
       box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
       z-index: 1000;
+      text-align: center;
     }
     .small-banner a {
       color: black; /* Set the email color to black */
@@ -86,6 +87,7 @@
   </script>
 </body>
 </html>
+
 
 
 
