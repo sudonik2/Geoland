@@ -2,21 +2,43 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title> GEOLAND ELD </title>
-
+  <title>GEOLAND ELD</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
         crossorigin=""/>
   <style>
-    #map{
-      width: 98%;
-      height: 98vh;
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    #map {
+      width: 100%;
+      height: 100vh;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #ffffff;
+      border-bottom: 1px solid #ccc;
+      padding: 5px; /* Reduced padding */
+      width: 30%;
+      text-align: center;
+      z-index: 1000;
+      font-size: 18px; /* Adjusted font size to fit */
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 1em; /* Adjusted font size for header */
     }
   </style>
-
 </head>
 <body>
-<div id="map"> </div>
+  <div class="header">
+    <h1>Geoland Emergency Landing Site Database</h1>
+  </div>
+  <div id="map"></div>
 </body>
 </html>
 
@@ -29,7 +51,7 @@
 
 <script>
   //initialize map
-  var map = L.map('map').setView([26.592304, -80.084910], 15.6);
+  var map = L.map('map').setView([26.592304, -80.084910], 15);
   //var map = L.map('map', {
     //center: [26.59, -80.04],
     //zoom: 15.6,
@@ -198,68 +220,99 @@
 
   };
 
-  var myLayer = L.geoJSON(geojsonFeature, {style:function(feature) {
-          switch (feature.properties.zone) {
-              case 'Safe': return {color: polygonColors.green};
-              case 'Caution':   return {color: polygonColors.yellow};
-              case 'Danger' :  return {color: polygonColors.red};
-              default: return {color: polygonColors.blue}
-          }
-      }
-  }).addTo(map);
+  //var myLayer = L.geoJSON(geojsonFeature, {style:function(feature) {
+        //  switch (feature.properties.zone) {
+         //     case 'Safe': return {color: polygonColors.green};
+         //     case 'Caution':   return {color: polygonColors.yellow};
+          //    case 'Danger' :  return {color: polygonColors.red};
+          //    default: return {color: polygonColors.blue}
+         // }
+     // }
+  //}).addTo(map);
 
 
-  // var zones = [{
-  //     "type": "Feature",
-  //     "properties": {"zone": "Safe"},
-  //     "geometry": {
-  //         "type": "Polygon",
-  //         "coordinates": [[
-  //             [-104.05, 48.99],
-  //             [-97.22,  48.98],
-  //             [-96.58,  45.94],
-  //             [-104.03, 45.94],
-  //             [-104.05, 48.99]
-  //         ]]
-  //     }
-  // }, {
-  //     "type": "Feature",
-  //     "properties": {"zone": "Caution"},
-  //     "geometry": {
-  //         "type": "Polygon",
-  //         "coordinates": [[
-  //             [-109.05, 41.00],
-  //             [-102.06, 40.99],
-  //             [-102.03, 36.99],
-  //             [-109.04, 36.99],
-  //             [-109.05, 41.00]
-  //         ]]
-  //     }
-  // }];
+  // Create separate layers for each zone
+var safeLayer = L.geoJSON(geojsonFeature, {
+    filter: function(feature) {
+        return feature.properties.zone === 'Safe';
+    },
+    style: function() {
+        return { color: polygonColors.green };
+    }
+});
 
-  // L.geoJSON(states, {
-  //     style: function(feature) {
-  //         switch (feature.properties.zone) {
-  //             case 'Safe': return {color: "#00ff22"};
-  //             case 'Caution':   return {color: "#eed202"};
-  //             case 'Danger' :  return {color: "#ff0000"};
-  //             default: return {color:"#102ebd"}
-  //         }
-  //     }
-  // }).addTo(map);
+var cautionLayer = L.geoJSON(geojsonFeature, {
+    filter: function(feature) {
+        return feature.properties.zone === 'Caution';
+    },
+    style: function() {
+        return { color: polygonColors.yellow };
+    }
+});
 
+var dangerLayer = L.geoJSON(geojsonFeature, {
+    filter: function(feature) {
+        return feature.properties.zone === 'Danger';
+    },
+    style: function() {
+        return { color: polygonColors.red };
+    }
+});
 
-
-
+// Add these layers to the map (optional if you want them visible by default)
+safeLayer.addTo(map);
+cautionLayer.addTo(map);
+dangerLayer.addTo(map);
 
   //Layers
   var baseMaps = {
     "Satellite": sat
+    
   };
 
-//  var overlayMaps = {
-//    "Zones": zones
-//};
+  var overlayMaps = {
+    "Safe": safeLayer,
+    "Caution": cautionLayer,
+    "Danger": dangerLayer
+};
 
-L.control.layers(baseMaps).addTo(map)
+
+// Legend control with white background
+var legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function(map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    
+    // Style the legend with a white background
+    div.style.backgroundColor = 'white';
+    div.style.padding = '8px';
+    div.style.border = '1px solid #ccc';
+
+    var zones = ['Safe', 'Caution', 'Danger'];
+    var labels = [];
+
+    // Loop through the zones and generate a label with a colored square for each zone
+    for (var i = 0; i < zones.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(zones[i]) + '; width: 18px; height: 18px; display: inline-block; margin-right: 8px;"></i> ' +
+            zones[i] + '<br>';
+    }
+
+    return div;
+};
+
+// Function to get color based on zone
+function getColor(zone) {
+    switch (zone) {
+        case 'Safe': return polygonColors.green;
+        case 'Caution': return polygonColors.yellow;
+        case 'Danger': return polygonColors.red;
+        default: return polygonColors.blue;
+    }
+}
+
+legend.addTo(map);
+
+
+L.control.layers(baseMaps, overlayMaps).addTo(map)
 </script>
