@@ -32,6 +32,25 @@
       margin: 0;
       font-size: 1em; /* Adjusted font size for header */
     }
+    .small-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 5px;
+      font-size: 12px; /* Very small font size */
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    .small-banner a {
+      color: black; /* Set the email color to black */
+      text-decoration: none;
+    }
+    .small-banner a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -39,6 +58,13 @@
     <h1>Geoland Emergency Landing Site Database</h1>
   </div>
   <div id="map"></div>
+  <div class="small-banner">
+    <a href="mailto:nikos.markis@protonmail.com">nikos.markis@protonmail.com</a>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin="">
+  </script>
 </body>
 </html>
 
