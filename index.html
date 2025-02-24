@@ -80,13 +80,31 @@
       z-index: 1000;
       text-align: center;
     }
-    .small-banner a {
-      color: black; /* Set the email color to black */
-      text-decoration: none;
-    }
-    .small-banner a:hover {
-      text-decoration: underline;
-    }
+    .small-banner {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.7); /* Matches the title bar */
+  color: #ffffff; /* White text for readability */
+  font-size: 12px; /* Same small, professional size */
+  font-weight: normal; /* No bold for a sleek look */
+  text-align: center;
+  z-index: 1000;
+  white-space: nowrap;
+  padding: 2px 8px; /* Minimal padding */
+  border-radius: 3px; /* Subtle rounded edges */
+  letter-spacing: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Soft, subtle border */
+}
+.small-banner a {
+  color: #ffffff; /* Ensures the email text stays white */
+  text-decoration: none;
+}
+.small-banner a:hover {
+  text-decoration: underline;
+}
+
   </style>
 
 </head>
