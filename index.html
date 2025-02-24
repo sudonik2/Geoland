@@ -28,21 +28,31 @@
       height: 100vh;
     }
     .header {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #ffffff; /* White background */
-      color: #000000; /* Black text */
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      width: auto;
-      max-width: 80%;
-      text-align: center;
-      z-index: 1000;
-      font-size: 16px; /* Adjusted font size for the banner */
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.7); /* Dark semi-transparent background */
+  color: #ffffff; /* White text for readability */
+  font-size: 12px; /* Small but professional */
+  font-weight: normal; /* No bold, keeps it sleek */
+  text-align: center;
+  z-index: 1000;
+  white-space: nowrap; /* Keeps text on one line */
+  padding: 2px 8px; /* Minimal padding */
+  border-radius: 3px; /* Subtle rounded edges */
+  letter-spacing: 0px; /* No extra spacing */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Soft, subtle border */
+}
+
+
+
+
+.header h1 {
+  margin: 0;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+}
     }
     .header h1 {
       margin: 0;
