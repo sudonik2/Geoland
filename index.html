@@ -50,7 +50,7 @@
   font-size: 1.1em;
   letter-spacing: 0.5px;
 }
-    }
+  
     .header h1 {
       margin: 0;
       font-size: 1em; /* Adjusted font size for header */
@@ -339,19 +339,6 @@
 
   };
  
-
-  //var myLayer = L.geoJSON(geojsonFeature, {style:function(feature) {
-        //  switch (feature.properties.zone) {
-         //     case 'Safe': return {color: polygonColors.green};
-         //     case 'Caution':   return {color: polygonColors.yellow};
-          //    case 'Danger' :  return {color: polygonColors.red};
-          //    default: return {color: polygonColors.blue}
-         // }
-     // }
-  //}).addTo(map);
-
-
-  // Create separate layers for each zone
 
 var safeLayer = L.geoJSON(geojsonFeature, {
     filter: function(feature) {
