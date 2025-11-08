@@ -105,6 +105,25 @@
   text-decoration: underline;
 }
 
+.advisory-banner {
+  position: fixed;
+  bottom: 35px; /* positions it just above the email banner */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.7);
+  color: #ffffff;
+  font-size: 11px; /* slightly smaller than the email text */
+  font-style: normal; /* gives it a subtle “advisory” tone */
+  font-weight: normal;
+  text-align: center;
+  z-index: 1000;
+  white-space: nowrap;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
   </style>
 
 </head>
@@ -119,6 +138,9 @@
   <div id="map"></div>
   <div class="small-banner">
     <a href="mailto:geolandav@gmail.com">geolandav@gmail.com</a>
+  </div>
+  <div class="advisory-banner">
+    Advisory only
   </div>
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
           integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
