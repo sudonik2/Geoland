@@ -1,3 +1,3 @@
 Geoland
-Emergency Landing site geospatial tool
-Created by Nikolaos Markis
+emergency landing site geospatial tool
+created by Nikolaos Markis
